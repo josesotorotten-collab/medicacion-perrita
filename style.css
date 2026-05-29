@@ -1,0 +1,388 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #fdf6f0;
+  --surface: #ffffff;
+  --text: #2d2d2d;
+  --text-muted: #888;
+  --ok: #3db87a;
+  --warning: #f0a500;
+  --danger: #e04e4e;
+  --border: #e8e0d8;
+  --radius: 16px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+header {
+  background: linear-gradient(135deg, #e07b54 0%, #c9614a 100%);
+  color: white;
+  text-align: center;
+  padding: 28px 20px 24px;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+header .subtitle {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px 16px 0;
+}
+
+/* ── Cards ─────────────────────────────── */
+#cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.med-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.card-title h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.card-title p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.card-body {
+  padding: 16px 20px;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-badge.ok        { background: #e8f7ef; color: var(--ok); }
+.status-badge.warning   { background: #fff4dc; color: var(--warning); }
+.status-badge.overdue   { background: #fdeaea; color: var(--danger); }
+.status-badge.unknown   { background: #f0f0f0; color: var(--text-muted); }
+
+.interval-tag {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: #f5f0eb;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.times {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.time-block {
+  background: #faf7f4;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.time-block .label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+}
+
+.time-block .value {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.time-block .value.overdue {
+  color: var(--danger);
+}
+
+.countdown {
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.countdown.ok      { background: #e8f7ef; color: var(--ok); }
+.countdown.warning { background: #fff4dc; color: var(--warning); }
+.countdown.overdue { background: #fdeaea; color: var(--danger); }
+.countdown.unknown { background: #f5f5f5; color: var(--text-muted); font-size: 1rem; font-weight: 400; }
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Buttons ────────────────────────────── */
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn:active { transform: scale(0.97); }
+.btn:hover  { opacity: 0.88; }
+
+.btn-primary {
+  background: #e07b54;
+  color: white;
+  flex: 1;
+}
+
+.btn-secondary {
+  background: #f0ebe5;
+  color: var(--text);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid #e07b54;
+  color: #e07b54;
+}
+
+.btn-ghost {
+  background: #f5f0eb;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 8px 12px;
+}
+
+/* ── Modals ─────────────────────────────── */
+#modal-overlay,
+#history-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+#modal,
+#history-modal {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+}
+
+#modal h2,
+#history-modal h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+#modal label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+#modal-datetime {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+#modal-datetime:focus {
+  border-color: #e07b54;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* History list */
+#history-list {
+  max-height: 260px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.history-item:last-child { border-bottom: none; }
+
+.history-delete {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+
+.history-delete:hover { color: var(--danger); }
+
+/* ── Config section ─────────────────────── */
+#config-section {
+  margin-top: 28px;
+}
+
+.toggle-config {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.toggle-config:hover { color: var(--text); }
+
+.config-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-top: 12px;
+}
+
+.config-card h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.config-help {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.config-steps {
+  font-size: 0.84rem;
+  padding-left: 18px;
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.config-steps code {
+  background: #f0ebe5;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+}
+
+.config-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.config-fields label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.config-fields input {
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.config-fields input:focus {
+  border-color: #e07b54;
+}
+
+.config-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.config-status {
+  margin-top: 12px;
+  font-size: 0.84rem;
+  min-height: 20px;
+}
+
+.hidden { display: none !important; }
